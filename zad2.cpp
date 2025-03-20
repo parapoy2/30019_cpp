@@ -22,4 +22,4 @@ int main() {
     cin >> n;
     n -= 1;
     cout << "n element Fibonacci " << n+1 << " wynosi: " << fibonacci(n) << endl;
-}
+} 

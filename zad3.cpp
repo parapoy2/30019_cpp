@@ -15,4 +15,4 @@ int main() {
     cout << "Podaj liczbe: ";
     cin >> n;
     cout << "Suma cyfr " << n << " wynosi: " << sumaCyfr(n) << endl;
-}
+}  
