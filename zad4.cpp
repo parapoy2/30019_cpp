@@ -20,3 +20,4 @@ int main() {
     cin >> cyfra;
     cout << "cyfra " << cyfra << " wystepuje: " << liczbaWystaoien(abs(n), cyfra) << endl;
 }
+
