@@ -71,7 +71,7 @@ int main() {
     printCyclicList(head);
     cout << "\n";
 
-    popFront(head);      
+    popFront(head);  
 
     cout << "Po usunieciu pierwszego: ";
     printCyclicList(head); 
