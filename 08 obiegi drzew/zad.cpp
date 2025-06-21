@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <stack>
 using namespace std;
 
 struct Node {
@@ -18,15 +19,42 @@ void addChild(shared_ptr<Node> parent, shared_ptr<Node> child) {
 void printTree(const shared_ptr<Node>& node, int depth = 0) {
     for (int i = 0; i < depth; ++i) cout << "  ";
     cout << node->data << "\n";
-    for (const shared_ptr<Node>& child : node->children) {
+    for (const auto& child : node->children) {
         printTree(child, depth + 1);
     }
 }
 
-int main() {
-    ///дир
-    auto director = make_shared<Node>("Director");
+void inorder(const shared_ptr<Node>& node) {
+    if (node == NULL)
+        return;
+    int total = node->children.size();
+    for (int i = 0; i < total - 1; i++) {
+        inorder(node->children[i]);
+    }
+    cout << node->data << " ";
+    if (total > 0) {
+        inorder(node->children[total - 1]);
+    }
+}
 
+vector<string> preorder(const shared_ptr<Node>& root) {
+    if (!root) return {};
+    vector<string> result;
+    stack<shared_ptr<Node>> nodes;
+    nodes.push(root);
+    while (!nodes.empty()) {
+        auto current = nodes.top();
+        nodes.pop();
+        result.push_back(current->data);
+        for (int i = current->children.size() - 1; i >= 0; --i) {
+            nodes.push(current->children[i]);
+        }
+    }
+    return result;
+}
+
+int main() {
+    auto director = make_shared<Node>("Director");
     auto asstGrad = make_shared<Node>("Asst. Dir. of Graduate Studies");
     auto assocAcad = make_shared<Node>("Assoc. Dir. for Academic Programs");
     auto adminAsst = make_shared<Node>("Administrative Assistant to the Director");
@@ -78,8 +106,25 @@ int main() {
     addChild(staff, make_shared<Node>("Technical Director"));
     addChild(staff, make_shared<Node>("Facilities Manager"));
 
+    cout << "struktura\n";
     printTree(director);
+
+    cout << endl;
+    cout << "In-order\n";
+    inorder(director);
+    cout << endl;
+    cout << endl;
+
+    cout << "pre-order\n";
+    vector<string> res = preorder(director);
+    for (const auto& s : res) {
+        cout << s << " ";
+    }
+    cout << endl;
 
     cin.get();
     return 0;
+
 }
+
+
