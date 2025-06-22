@@ -15,9 +15,9 @@ bool compare(Przedmiot a, Przedmiot b) {
 
 int main() {
     vector<Przedmiot> przedmioty = {
-        {4, 10}, {2, 4}, {3, 7}
+        {10, 60}, {20, 100}, {30, 120}
     };
-    int maxWaga = 5;
+    int maxWaga = 50;
 
     for (auto& p : przedmioty) p.ratio = (double)p.wartosc / p.waga;
     sort(przedmioty.begin(), przedmioty.end(), compare);
